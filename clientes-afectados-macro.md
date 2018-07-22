@@ -16,4 +16,15 @@ INSERT INTO sigweb.buffer_m (geog)
 SELECT ST_Buffer(geometriaconexionagua::geography, 20) FROM sigweb.padron;
 
 
+###Creamos una tabla buffer_intercet_tuberia
 
+
+CREATE TABLE sigweb.buffer_intercet_tuberia (
+ id serial primary key,
+geog geometry (Polygon, 4326)
+);
+
+###Insertamos las intececciones en la tabla buffer_intercet_tuberia
+
+INSERT INTO sigweb.buffer_intercet_tuberia(geog)
+select buffer_m.geog::geometry from sigweb.buffer_m, sigweb.tuberia_proyectada where st_intersects(buffer_m.geog::geometry, tuberia_proyectada.geom);
