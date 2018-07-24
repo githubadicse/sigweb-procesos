@@ -12,7 +12,8 @@ geog geography (Polygon, 4326)
 
 - En esta tabla se grabara un poligono generado por un buffer a partir de los puntos de conexiones.
 
-//aqui es donde se indica a cuantos metros de crea el buffer Ejem. 20Mtrs
+*aqui es donde se indica a cuantos metros de crea el buffer Ejem. 20Mtrs*
+
 INSERT INTO sigweb.buffer_m (geog)  
 SELECT ST_Buffer(geometriaconexionagua::geography, 30) FROM sigweb.padron;
 
