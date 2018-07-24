@@ -26,7 +26,7 @@ CREATE TABLE sigweb.buffer_intercet_tuberia (
 geog geometry (Polygon, 4326)  
 );
 
-- Insertamos las intececciones en la tabla buffer_intercet_tuberia
+- Insertamos las intececciones en la tabla buffer_intercet_tuberia.
 
 INSERT INTO sigweb.buffer_intercet_tuberia(geog)  
 select buffer_m.geog::geometry from sigweb.buffer_m, sigweb.tuberia_proyectada where st_intersects(buffer_m.geog::geometry,  tuberia_proyectada.geom);
@@ -40,7 +40,8 @@ nombres varchar,
 direccion varchar  
 );
 
-- Procesamos todos los clientes que esten en buffer_intercet_tuberia
+- Procesamos todos los clientes que esten en buffer_intercet_tuberia.
+
 insert into sigweb.tmp_padron_macro(geom)  
 select geometriaconexionagua  
 from sigweb.padron, sigweb.buffer_intercet_tuberia  
