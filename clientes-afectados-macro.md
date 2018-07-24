@@ -4,16 +4,16 @@
 
 - Primero debemos crear una table en la base de datos sigweb, schema sigweb
 
-CREATE TABLE sigweb.buffer_m (
- id serial primary key,
-geog geography (Polygon, 4326)
+CREATE TABLE sigweb.buffer_m (  
+ id serial primary key,  
+geog geography (Polygon, 4326)  
 );
 
 
 - En esta tabla se grabara un poligono generado por un buffer a partir de los puntos de conexiones.
 
 //aqui es donde se indica a cuantos metros de crea el buffer Ejem. 20Mtrs
-INSERT INTO sigweb.buffer_m (geog)
+INSERT INTO sigweb.buffer_m (geog)  
 SELECT ST_Buffer(geometriaconexionagua::geography, 30) FROM sigweb.padron;
 
 
@@ -40,9 +40,9 @@ direccion varchar
 );
 
 - Procesamos todos los clientes que esten en buffer_intercet_tuberia
-insert into sigweb.tmp_padron_macro(geom)
-select geometriaconexionagua 
-from sigweb.padron, sigweb.buffer_intercet_tuberia
-where st_within(padron.geometriaconexionagua, buffer_intercet_tuberia.geog::geometry )
-group by geometriaconexionagua
+insert into sigweb.tmp_padron_macro(geom)  
+select geometriaconexionagua  
+from sigweb.padron, sigweb.buffer_intercet_tuberia  
+where st_within(padron.geometriaconexionagua, buffer_intercet_tuberia.geog::geometry )  
+group by geometriaconexionagua  
 ;
