@@ -34,11 +34,16 @@ select buffer_m.geog::geometry from sigweb.buffer_m, sigweb.tuberia_proyectada w
 
 CREATE TABLE sigweb.tmp_padron_macro (
  id serial primary key,
-geom geometry (Point, 4326)
+geom geometry (Point, 4326),
+nombres varchar,
+direccion varchar
+
 );
 
 - Procesamos todos los clientes que esten en buffer_intercet_tuberia
 insert into sigweb.tmp_padron_macro(geom)
 select geometriaconexionagua 
 from sigweb.padron, sigweb.buffer_intercet_tuberia
-where st_within(padron.geometriaconexionagua, buffer_intercet_tuberia.geog::geometry );
+where st_within(padron.geometriaconexionagua, buffer_intercet_tuberia.geog::geometry )
+group by geometriaconexionagua
+;
