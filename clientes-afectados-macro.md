@@ -62,5 +62,5 @@ where st_within(padron.geometriaconexionagua, buffer_intercet_tuberia.geog::geom
 group by padron.geometriaconexionagua, padron.inscrinro  ;
 
 
-xx
-esta es la ultima modificacion
+
+-esta es la ultima modificacion
